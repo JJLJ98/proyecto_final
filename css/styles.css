@@ -61,3 +61,11 @@ img{
     
 }
 
+button{
+    padding: 10px 20px;
+    background-color: white;
+    color: #D9A679;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
