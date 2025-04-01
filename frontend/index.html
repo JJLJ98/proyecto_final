@@ -13,11 +13,12 @@
         <h1>Biblioteca Digital</h1>
         <input type="text" id="search" placeholder="Buscar libros..." oninput="searchBooks()">
         <br><br>
-        <button id="sautores">Autores</button>
+        <button id="sautores" onclick="autores()">Autores</button>
         <button id="slibros">Libros</button>
+        <!--onclick="autores()"-->
     </header>
     <main>
-        <section class="featured-books">
+        <section class="featured-books" id="featured-books">
             <h2>Libros Destacados</h2>
             <div class="book-list" id="bookList">
                 <div class="book-card"><img src="./img/libro1.jpeg" alt="">
@@ -55,7 +56,7 @@
                 </div>
             </div>
         </section>
-        <section class="categories">
+        <section class="categories" id="categories">
             <h2>Categorías Populares</h2>
             <div class="category-list">
                 <div class="category">Ficción</div>
@@ -63,7 +64,59 @@
                 <div class="category">Ciencia</div>
             </div>
         </section>
-    </main>
 
+        <section class="autor" id="autor" hidden>
+            <h1>Creación de Autor</h1>
+            <form onsubmit="crearAutor(); return false;">
+                <label for="Nombre">Nombres</label>
+                <input type="text" id="Nombre" name="Nombre"><br><br>
+                <label for="Apellidos">Apellidos</label>
+                <input type="text" id="Apellidos" name="Apellidos"><br><br>
+                <label for="fechPub">Fecha publicación primer libro</label>
+                <input type="date" id="fechPub" name="fechPub"><br><br>
+                <label for="Premios">Premios</label>
+                <input type="text" id="Premios" name="Premios">
+                <input type="button" onclick="agregarPremio()" value="Agregar Premio"><br><br>
+                <label for="fecNac">Fecha nacimiento</label>
+                <input type="date" id="fecNac" name="fecNac"><br><br>
+                <label for="fecFall">Fecha fallecimiento</label>
+                <input type="date" id="fecFall" name="fecFall"><br><br>
+
+                <input type="submit" value="Crear Autor">
+                <input type="button" onclick="consultarAutor()" value="Consultar Autor">
+                <input type="button" onclick="modificarAutor()" value="Modificar Autor">
+                <input type="button" onclick="eliminarAutor()" value="Eliminar Autor">
+                <br><br>
+            </form>
+            <div id="">
+                <h2>Autores Registrados</h2>
+                <table id="listaAutores">
+                    <thead>
+                        <tr>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Fecha Publicación Primer Libro</th>
+                            <th>Premios</th>
+                            <th>Fecha Nacimiento</th>
+                            <th>Fecha Fallecimiento</th>
+                        </tr>
+                        <tr id=""></tr>
+                        <tr name="listaAutores"></tr>
+                    </thead>
+                    <tbody id="">
+                        <tr>
+                            <td name="nombresAutor"></td>
+                            <td name="apellidosAutor"></td>
+                            <td name="fpAutor"></td>
+                            <td name="pAutor"></td>
+                            <td name="fnAutor"></td>
+                            <td name="ffAutor"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
 </body>
 </html>
