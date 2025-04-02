@@ -12,16 +12,19 @@
     <header>
         <h1>Biblioteca Digital</h1>
         <input type="text" id="search" placeholder="Buscar libros..." oninput="searchBooks()">
-        <br><br>
+        <!-- Menú principal -->
         <button id="sautores" onclick="autores()">Autores</button>
-        <button id="slibros">Libros</button>
-        <!--onclick="autores()"-->
+        <button id="slibros" onclick="libros()">Libros</button>
+        <button onclick="leerAutores()">prueba json</button>
+
     </header>
     <main>
+        <!-- PÁGINA PRINCIPAL -->
+        <!--Libros destacados-->
         <section class="featured-books" id="featured-books">
             <h2>Libros Destacados</h2>
             <div class="book-list" id="bookList">
-                <div class="book-card"><img src="./img/libro1.jpeg" alt="">
+                <!--<div class="book-card"><img src="./img/libro1.jpeg" alt="">
                     <div class="description">
                         <a href="">Alicia en el país de las maravillas</a>
                     </div>
@@ -30,12 +33,12 @@
                     <div class="description">
                         <a href="">El código Da vinci</a>
                     </div>
-                </div>
+                </div>-->
                 <div class="book-card">
                     <a href="" target="_blank">
                         <img src="./img/libro3.jpeg" alt="">
                         <div class="description">
-                            <p>El libro del sol</p>
+                            <a href="">El libro del sol</a>
                         </div>
                     </a>
                 </div>
@@ -56,6 +59,8 @@
                 </div>
             </div>
         </section>
+        
+        <!--POSIBLE A ELIMINAR
         <section class="categories" id="categories">
             <h2>Categorías Populares</h2>
             <div class="category-list">
@@ -63,58 +68,240 @@
                 <div class="category">Historia</div>
                 <div class="category">Ciencia</div>
             </div>
-        </section>
+        </section>-->
 
-        <section class="autor" id="autor" hidden>
-            <h1>Creación de Autor</h1>
-            <form onsubmit="crearAutor(); return false;">
-                <label for="Nombre">Nombres</label>
-                <input type="text" id="Nombre" name="Nombre"><br><br>
-                <label for="Apellidos">Apellidos</label>
-                <input type="text" id="Apellidos" name="Apellidos"><br><br>
-                <label for="fechPub">Fecha publicación primer libro</label>
-                <input type="date" id="fechPub" name="fechPub"><br><br>
-                <label for="Premios">Premios</label>
-                <input type="text" id="Premios" name="Premios">
-                <input type="button" onclick="agregarPremio()" value="Agregar Premio"><br><br>
-                <label for="fecNac">Fecha nacimiento</label>
-                <input type="date" id="fecNac" name="fecNac"><br><br>
-                <label for="fecFall">Fecha fallecimiento</label>
-                <input type="date" id="fecFall" name="fecFall"><br><br>
+        <!-- LIBROS-->
 
-                <input type="submit" value="Crear Autor">
-                <input type="button" onclick="consultarAutor()" value="Consultar Autor">
-                <input type="button" onclick="modificarAutor()" value="Modificar Autor">
-                <input type="button" onclick="eliminarAutor()" value="Eliminar Autor">
-                <br><br>
-            </form>
-            <div id="">
-                <h2>Autores Registrados</h2>
-                <table id="listaAutores">
-                    <thead>
-                        <tr>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Fecha Publicación Primer Libro</th>
-                            <th>Premios</th>
-                            <th>Fecha Nacimiento</th>
-                            <th>Fecha Fallecimiento</th>
-                        </tr>
-                        <tr id=""></tr>
-                        <tr name="listaAutores"></tr>
-                    </thead>
-                    <tbody id="">
-                        <tr>
-                            <td name="nombresAutor"></td>
-                            <td name="apellidosAutor"></td>
-                            <td name="fpAutor"></td>
-                            <td name="pAutor"></td>
-                            <td name="fnAutor"></td>
-                            <td name="ffAutor"></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <section class="mLibros" id="mLibros" hidden>
+            <button class="cta-1" onclick="mostrarFormulario()">Crear Libro</button>
+            <button class="cta" id="eliminarBtn" onclick="mostrarConfirmacion()">Eliminar</button>
+            <!-- Barra de búsqueda libro -->
+            <input type="text" id="buscar" placeholder="Buscar libro..." oninput="filtrarLibros()" class="input-buscar">
+
+        <!-- Modal para Crear Libro -->
+        <div id="crearLibro" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarFormulario()">&times;</span>
+                <h3>Crear Libro</h3>
+                <form id="libroForm" onsubmit="guardarLibro(); return false;">
+                    <label>ISBN:</label>
+                    <input class="input" type="text" id="isbn" required><br>
+
+                    <label>Título:</label>
+                    <input class="input" type="text" id="titulo" required><br>
+
+                    <label>Autor: <input class="input" list="autores" id="autor"></label>
+                    <datalist id="autores">
+                    <option value="Gabriel"></option>
+                    <option value="Louise"></option>
+                    <option value="Julio"></option>
+                    </datalist>
+
+                    <label>Fecha de Edición:</label>
+                    <input class="input" type="date" id="fechaEdicion" required><br>
+
+                    <label>Número de Páginas:</label>
+                    <input class="input" type="number" id="numPaginas" required><br>
+
+                    <label>Cantidad de Ejemplares:</label>
+                    <input class="input" type="number" id="cantEjemplares" required><br>
+
+                    <label>Cantidad de Ejemplares Disponibles:</label>
+                    <input class="input" type="number" id="cantEjemplaresDisponibles" required><br>
+
+                    <label>Sinopsis:</label><br>
+                    <textarea class="textarea" id="sinopsis" rows="4" required></textarea><br>
+
+                    <label>Tipo de Presentación:</label>
+                    <input class="input" type="text" id="presentacion" required><br>
+
+                    <label>Tipo de Literatura:</label>
+                    <input class="input" type="text" id="literatura" required><br>
+
+                    <button type="submit" class="cta">Guardar Libro</button>
+                </form>
             </div>
+        </div>
+
+        <div id="editarLibro" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarFormulario()">&times;</span>
+                <h3>Editar Libro</h3>
+                <form id="bookForm" onsubmit="guardarLibro(); return false;">
+                    <label>ISBN:</label>
+                    <input class="input" type="text" id="isbnEditar" required><br>
+
+                    <label>Título:</label>
+                    <input class="input" type="text" id="tituloEditar" required><br>
+
+                    <label>Autor: <input class="input" list="autores" id="autorEditar"></label>
+                    <datalist id="autores">
+                    <option value="Gabriel"></option>
+                    <option value="Louise"></option>
+                    <option value="Julio"></option>
+                    </datalist>
+
+                    <label>Fecha de Edición:</label>
+                    <input class="input" type="date" id="fechaEdicionEditar" required><br>
+
+                    <label>Número de Páginas:</label>
+                    <input class="input" type="number" id="numPaginasEditar" required><br>
+
+                    <label>Cantidad de Ejemplares:</label>
+                    <input class="input" type="number" id="cantEjemplaresEditar" required><br>
+
+                    <label>Cantidad de Ejemplares Disponibles:</label>
+                    <input class="input" type="number" id="cantEjemplaresDisponiblesEditar" required><br>
+
+                    <label>Sinopsis:</label><br>
+                    <textarea class="textarea" id="sinopsisEditar" rows="4" required></textarea><br>
+
+                    <label>Tipo de Presentación:</label>
+                    <input class="input" type="text" id="presentacionEditar" required><br>
+
+                    <label>Tipo de Literatura:</label>
+                    <input class="input" type="text" id="literaturaEditar" required><br>
+
+                    <button type="submit" class="cta">Guardar Libro</button>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <h2>Lista de Libros</h2>
+            <table id="tablaLibros">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="seleccionarTodos" onclick="seleccionarTodos(this)"></th>
+                        <th>ISBN</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Fecha de Edición</th>
+                        <th>Número de Páginas</th>
+                        <th>Cantidad de Ejemplares</th>
+                        <th>Cantidad Disponible</th>
+                        <th>Sinopsis</th>
+                        <th>Presentación</th>
+                        <th>Literatura</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaLibrosBody">
+                    <!-- Los libros se agregarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal de confirmación -->
+        <div id="confirmacionEliminar" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarConfirmacion()">&times;</span>
+                <h3>¿Está seguro de que desea eliminar los libros seleccionados?</h3>
+                <button onclick="confirmarEliminacion()">Aceptar</button>
+                <button onclick="cerrarConfirmacion()">Cancelar</button>
+            </div>
+        </div>
+
+        </section>
+        
+        <!-- AUTORES -->
+        <section class="mAutor" id="mAutor" hidden>
+            
+            <button class="cta-1" onclick="mostrarFormularioA()">Crear Autor</button>
+            <button class="cta" id="eliminarBtnA" onclick="mostrarConfirmacionA()">Eliminar</button>
+            <!-- Barra de búsqueda autor -->
+            <input type="text" id="buscarA" placeholder="Buscar Autor..." oninput="filtrarAutores()" class="input-buscar">
+
+            <!-- Modal para Crear Autor -->
+        <div id="crearAutor" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarFormularioA()">&times;</span>
+                <h3>Crear Autor</h3>
+                <form id="autorForm" onsubmit="guardarAutor(); return false;">
+                    <label for="Nombre">Nombres</label>
+                    <input type="text" id="Nombre" name="Nombre"><br>
+
+                    <label for="Apellidos">Apellidos</label>
+                    <input type="text" id="Apellidos" name="Apellidos"><br>
+                    
+                    <label for="fechPub">Fecha publicación primer libro</label>
+                    <input type="date" id="fechPub" name="fechPub"><br>
+                    
+                    <label for="Premios">Premios</label>
+                    <input type="text" id="Premios" name="Premios">
+                    <input type="button" onclick="agregarPremio()" value="Agregar Premio"><br>
+                    
+                    <label for="fecNac">Fecha nacimiento</label>
+                    <input type="date" id="fecNac" name="fecNac"><br>
+                    
+                    <label for="fecFall">Fecha fallecimiento</label>
+                    <input type="date" id="fecFall" name="fecFall"><br>
+
+                    <button type="submit" class="cta">Guardar Autor</button>
+                </form>
+            </div>
+        </div>
+        <!-- Modal para editar autor-->
+        <div id="editarAutor" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarFormularioA()">&times;</span>
+                <h3>Editar Autor</h3>
+                <form id="autorForm" onsubmit="guardarAutor(); return false;">
+                    <label for="Nombre">Nombres</label>
+                    <input type="text" id="nombresEditar" name="Nombre"><br>
+
+                    <label for="Apellidos">Apellidos</label>
+                    <input type="text" id="apellidosEditar" name="Apellidos"><br>
+                    
+                    <label for="fechPub">Fecha publicación primer libro</label>
+                    <input type="date" id="fechPubEditar" name="fechPub"><br>
+                    
+                    <label for="Premios">Premios</label>
+                    <input type="text" id="premiosEditar" name="Premios">
+                    <input type="button" onclick="agregarPremio()" value="Agregar Premio"><br>
+                    
+                    <label for="fecNac">Fecha nacimiento</label>
+                    <input type="date" id="fecNacEditar" name="fecNac"><br>
+                    
+                    <label for="fecFall">Fecha fallecimiento</label>
+                    <input type="date" id="fecFallEditar" name="fecFall"><br>
+
+                    <button type="submit" class="cta">Guardar Autor</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            <h2>Lista de Libros</h2>
+            <table id="tablaAutores">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="seleccionarTodosA" onclick="seleccionarTodosA(this)"></th>
+                        <th>NOMBRES</th>
+                        <th>APELLIDOS</th>
+                        <th>PRIMERA PUBLICACIÓN</th>
+                        <th>PREMIOS</th>
+                        <th>F. NACIMIENTO</th>
+                        <th>F. FALLECIMIENTO</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaAutoresBody">
+                    <!-- Los autores se agregarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal de confirmación autor -->
+        <div id="confirmacionEliminarA" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarConfirmacionA()">&times;</span>
+                <h3>¿Está seguro de que desea eliminar los autores seleccionados?</h3>
+                <button onclick="confirmarEliminacionA()">Aceptar</button>
+                <button onclick="cerrarConfirmacionA()">Cancelar</button>
+            </div>
+        </div>
+        <div id="listaAutores">
+            Llamado a la base de datos
+            <button onclick="getAutores()">llamarBD</button>
+        </div>
         </section>
 
     </main>
