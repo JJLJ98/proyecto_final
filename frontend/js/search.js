@@ -136,27 +136,25 @@ function guardarAutor() {
 }
 
 // Leer y mostrar los autores almacenados
-function leerAutores() {
-    let jsonAutores = llamarAPI();
-    console.log(jsonAutores);
-    const autores = JSON.parse(jsonAutores) || [];//CREAR FUNCIÓN PARA ORDENAR SOLO EL JSON DE AUTORES
+function leerAutores(result) {
+    const autores = (result) || [];
     const tablaAutores = document.getElementById("tablaAutoresBody");
     tablaAutores.innerHTML = "";
 
-    autores.forEach((autor, index) => {
+    autores.forEach((biblioteca, index) => {
         const fila = document.createElement("tr");
         fila.classList.add("book-row"); 
         fila.innerHTML = `
             <td><input type="checkbox" class="checkboxAutor" data-index="${index}"></td>
-            <td>${autor.nombres}</td>
-            <td>${autor.apellidos}</td>
-            <td>${autor.fechPub}</td>
-            <td>${autor.premios}</td>
-            <td>${autor.fecNac}</td>
-            <td>${autor.fecFall}</td>
+            <td>${biblioteca.Autor.Nombre}</td>
+            <td>${biblioteca.Autor.Apellidos}</td>
+            <td>${biblioteca.Autor.fechPub}</td>
+            <td>${biblioteca.Autor.Premios}</td>
+            <td>${biblioteca.Autor.fecNac}</td>
+            <td>${biblioteca.Autor.fecFall}</td>
             <td><button onclick="editarAutor(${index})">Editar</button></td>
         `;
-        tablaAutores.appendChild(fila);
+        tablaAutoresB.appendChild(fila);
     });
 }
 
@@ -460,11 +458,32 @@ function llamarAPI() {
                 'Content-Type': 'application/json'
             }
         }
-        )   
+        )
+        
         .then( (rta) => { return( rta.json() )} )
         .then( (res) => {
+            leerAutores(res); //Agregar parametro en funcion leerLibros
             console.log( "-->",res ) ;
-            //document.getElementById("listaAutores").innerHTML = JSON.stringify(ret) ;
+            /*const autores= (res) || [];
+            const tablaAutoresB = document.getElementById("tablaAutoresBody");
+            
+            tablaAutoresB.innerHTML = "";
+//probar con los libros
+            autores.forEach((biblioteca, index) => {
+                const fila = document.createElement("tr");
+                fila.classList.add("book-row"); 
+                fila.innerHTML = `
+                    <td><input type="checkbox" class="checkboxAutor" data-index="${index}"></td>
+                    <td>${biblioteca.Autor.Nombre}</td>
+                    <td>${biblioteca.Autor.Apellidos}</td>
+                    <td>${biblioteca.Autor.fechPub}</td>
+                    <td>${biblioteca.Autor.Premios}</td>
+                    <td>${biblioteca.Autor.fecNac}</td>
+                    <td>${biblioteca.Autor.fecFall}</td>
+                    <td><button onclick="editarAutor(${index})">Editar</button></td>
+                `;
+                tablaAutoresB.appendChild(fila);
+    })*/;
         } )
         .catch( (err) => {
         console.log( "ERR:" + err ) ;
