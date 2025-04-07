@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Autores | Biblioteca Virtual</title>
+  <link rel="stylesheet" href="./css/autores.css" />
+</head>
+<body>
+    <main class="container">
+      <h1>Autores</h1>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="libros.html">Libros</a>
+      </nav>
+
+      <div class="acciones">
+        <button id="crearAutorBtn">Crear Autor</button>
+        <button id="eliminarAutoresBtn">Eliminar</button>
+        <input type="text" id="busquedaAutor" placeholder="Buscar autor...">
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="seleccionarTodosAutores"></th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Fecha Nacimiento</th>
+            <th>Premios</th>
+            <th>Fecha Fallecimiento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaAutoresBody">
+          <!-- Aquí se cargan los autores desde autores.js -->
+        </tbody>
+      </table>
+    </main>
+
+    <!-- Modal de Crear/Editar Autor -->
+    <div id="modalAutor" class="modal oculto">
+      <div class="modal-contenido">
+        <h2 id="tituloModalAutor">Nuevo Autor</h2>
+        <form id="formAutor">
+          <input type="hidden" id="autorId" />
+          <label>Nombre: <input type="text" id="nombre" required /></label>
+          <label>Apellidos: <input type="text" id="apellidos" required /></label>
+          <label>Fecha de Nacimiento: <input type="date" id="fechaNacimiento" required /></label>
+          <label>Premios: <input id="premios" placeholder="Premios separados por comas"></label>
+          <label>Fecha de Fallecimiento: <input type="date" id="fechaFallecimiento" /></label>
+          <div class="botones">
+            <button type="submit" id="guardarAutorBtn">Guardar</button>
+            <button type="button" id="cancelarAutorBtn">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Modal de Confirmación -->
+    <div id="modalConfirmacionAutor" class="modal oculto">
+      <div class="modal-contenido">
+        <p>¿Está seguro de eliminar los autores seleccionados?</p>
+        <div class="botones">
+          <button id="confirmarEliminarAutor">Aceptar</button>
+          <button id="cancelarEliminarAutor">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+  <script src="./js/autores.js"></script>
+</body>
+</html>

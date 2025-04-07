@@ -1,0 +1,220 @@
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #f2f2f2;
+  color: #333;
+}
+
+/* ===== Main Container ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* ===== Navigation ===== */
+nav {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #2980b9;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Actions Section ===== */
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.acciones button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: background-color 0.2s;
+}
+
+.acciones button:hover {
+  background-color: #1c5980;
+}
+
+.acciones input {
+  flex-grow: 1;
+  min-width: 250px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* ===== Table Styles ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  color: white;
+}
+
+th {
+  background-color: #0077cc;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* ===== Modal Styles ===== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal.oculto {
+  display: none;
+}
+
+.modal-contenido {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-contenido h2 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.modal-contenido form label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.modal-contenido input,
+.modal-contenido textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 0.95em;
+}
+
+.modal-contenido textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.botones {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.botones button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+#guardarAutorBtn,
+#confirmarEliminarAutor {
+  background-color: #27ae60;
+  color: white;
+}
+
+#guardarAutorBtn:hover,
+#confirmarEliminarAutor:hover {
+  background-color: #219150;
+}
+
+#cancelarAutorBtn,
+#cancelarEliminarAutor {
+  background-color: #e74c3c;
+  color: white;
+}
+
+#cancelarAutorBtn:hover,
+#cancelarEliminarAutor:hover {
+  background-color: #c0392b;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+  
+@media screen and (max-width: 600px) {
+    .acciones {
+      flex-direction: column;
+    }
+  
+    .botones {
+      flex-direction: column;
+    }
+  }
+  

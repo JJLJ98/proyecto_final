@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Libros</title>
+      <link rel="stylesheet" href="./css/libros.css">
+  </head>
+  <body>
+      <main class="container">
+        <h1>Libros</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="autores.html">Autores</a>
+          </nav>
+        <div class="toolbar">
+          <button id="btnCrearLibro">📘 Crear Libro</button>
+          <button id="btnEliminarLibros">🗑️ Eliminar</button>
+          <input type="text" id="busquedaLibro" placeholder="Buscar por título o autor..." />
+        </div>
+    
+        <table id="tablaLibros">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="checkAll" /></th>
+              <th>ISBN</th>
+              <th>Título</th>
+              <th>Fecha Edición</th>
+              <th>N° Páginas</th>
+              <th>Ejemplares</th>
+              <th>Disponibles</th>
+              <th>Sinopsis</th>
+              <th>Tipo Presentación</th>
+              <th>Tipo Literatura</th>
+              <th>Autor</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se cargarán los libros dinámicamente con JS -->
+          </tbody>
+        </table>
+      </main>
+
+    
+      <!-- 🎯 Modal Crear/Editar Libro -->
+      <div id="modalLibro" class="modal hidden">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2 id="modalTitulo">Crear Libro</h2>
+          <form id="formLibro">
+            <input type="hidden" id="modoLibro" value="crear"/>
+            <label>ISBN:<input type="text" id="isbn" required/></label>
+            <label>Título:<input type="text" id="titulo" required/></label>
+            <label>Fecha de Edición:<input type="date" id="fechaEdicion" required /></label>
+            <label>Número de Páginas:<input type="number" id="numPaginas" required/></label>
+            <label>Ejemplares:<input type="number" id="cantEjemplares" required/></label>
+            <label>Disponibles:<input type="number" id="cantEjemplaresDisponibles" required/></label>
+            <label>Sinopsis:<textarea id="sinopsis" required maxlength="1000"></textarea></label>
+            <label>Tipo de Presentación:
+              <input type="text" id="tipoPresentacion">
+            </label>
+            <label>Tipo de Literatura:
+              <input type="text" id="tipoLiteratura">
+            </label>
+            <label>Autor:
+              <input list="autoresList" id="autorNombre" required />
+              <datalist id="autoresList">
+                <option value="Desconocido"></option>
+                <!-- Autores cargados dinámicamente desde DB -->
+              </datalist>
+              <button type="button" id="btnCrearAutorDesdeLibro">Crear nuevo autor</button>
+            </label>
+    
+            <button type="submit">Guardar</button>
+          </form>
+        </div>
+      </div>
+    
+      <!-- ❓ Modal Confirmación Eliminación -->
+      <div id="modalConfirmarEliminar" class="modal hidden">
+        <div class="modal-content">
+          <p>¿Está seguro de eliminar los libros seleccionados?</p>
+          <button id="confirmarEliminar">Sí, eliminar</button>
+          <button class="close-modal">Cancelar</button>
+        </div>
+      </div>
+    
+      <script src="./js/libros.js"></script>
+  </body>
+</html>
